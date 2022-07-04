@@ -16,7 +16,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "json-server --watch /home/figue/Development/code/phase-2/project-2-final/backend-project-2-final/db.json -p 6001"
   },
   "eslintConfig": {
     "extends": [
