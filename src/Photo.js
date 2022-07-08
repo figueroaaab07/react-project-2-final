@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-function Photo({ id, src }) {
+function Photo({ id, src, log, setLog }) {
+
+  async function logData(newLog) {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newLog)
+    };
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/log`, requestOptions);
+    const json = await response.json();
+    setLog([...log, json]);
+  }
+  
+  useEffect(() => {
+    logData({id, src})
+  // eslint-disable-next-line
+  }, []);
+
   return (
     <div className="column">
       <img id={id} alt="Mars" src={src} width="100%"/> 

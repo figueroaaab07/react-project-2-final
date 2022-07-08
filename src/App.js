@@ -5,15 +5,20 @@ import Home from "./Home";
 import Rovers from "./Rovers";
 import Rover from "./Rover";
 import About from "./About";
+import Logger from "./Logger";
 import NoMatch from "./NoMatch";
 
 function App() {
+  // eslint-disable-next-line
   const [curiosityActual, setCuriosityActual] = useState([]);
+  // eslint-disable-next-line
   const [cALoading, setCALoading] = useState(true);
   const [manifests, setManifests] = useState([]);
+  // eslint-disable-next-line
   const [mLoading, setMLoading] = useState(true);
   // eslint-disable-next-line
   const [curiosityData, setCuriosityData] = useState([]);
+  // eslint-disable-next-line
   const [cDLoading, setCDLoading] = useState(true);
   // eslint-disable-next-line
   const [opportunityData, setOpportunityData] = useState([]);
@@ -26,6 +31,8 @@ function App() {
   const [roverSelected, setRoverSelected] = useState("");
   const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  // eslint-disable-next-line
+  const [log, setLog] = useState([]);
 
   async function getCuriosityActual() {
     const response = await fetch(
@@ -42,7 +49,7 @@ function App() {
 
   async function getManifests() {
     let response = await fetch(
-      "https://backend-project-2-final.herokuapp.com/manifests"
+      `${process.env.REACT_APP_API_URL}/manifests`
     );
     const json = await response.json();
     setManifests(json);
@@ -55,7 +62,7 @@ function App() {
 
   async function getCuriosityData() {
     let response = await fetch(
-      "https://backend-project-2-final.herokuapp.com/curiosity"
+      `${process.env.REACT_APP_API_URL}/curiosity`
     );
     const json = await response.json();
     setCuriosityData(json);
@@ -68,7 +75,7 @@ function App() {
 
   async function getOpportunityData() {
     let response = await fetch(
-      "https://backend-project-2-final.herokuapp.com/opportunity"
+      `${process.env.REACT_APP_API_URL}/opportunity`
     );
     const json = await response.json();
     setOpportunityData(json);
@@ -80,7 +87,7 @@ function App() {
 
   async function getSpiritData() {
     let response = await fetch(
-      "https://backend-project-2-final.herokuapp.com/spirit"
+      `${process.env.REACT_APP_API_URL}/spirit`
     );
     const json = await response.json();
     setSpiritData(json);
@@ -128,33 +135,6 @@ function App() {
       .then(setIsLoading(false))
   }
 
-  function updateCuriosity(actual, data, setData, manifests, cALoading, cDLoading, mLoading) {
-    if(cALoading || cDLoading || mLoading) {
-      return <div>Loading...</div>
-    } else {
-      const newDates = actual.photo_manifest.photos.filter(photo => photo.sol > manifests[0].max_sol);
-      console.log(newDates);
-
-      newDates.forEach(newDate => console.log(JSON.stringify(newDate))
-      //   {
-      //   fetch("http://localhost:6001/curiosity", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(newDate),
-      //   })
-      //   .then((r) => r.json())
-      //   .then((newItem) => setData([...data, newItem]));
-      // }
-      )
-      // console.log(`Curiosity Actual: ${actual.photo_manifest.photos}`);
-      // console.log(`Curiosity Data: ${manifests[0].max_sol}`);
-    }
-  }
-
-  updateCuriosity(curiosityActual, curiosityData, setCuriosityData, manifests, cALoading, cDLoading, mLoading);
-
   return (
     <>
       <h1 className="header">The Mars Exploration Rovers</h1>
@@ -163,8 +143,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/rovers" element={<Rovers manifests={manifests} />} >
-          <Route path=":roverId" element={<Rover manifests={manifests} handleDateChange={handleDateChange} date={date} setDate={setDate} isValidDate={isValidDate} setIsValidDate={setIsValidDate} dateData={dateData} handleRadioChange={handleRadioChange} cameraSelected={cameraSelected} photos={photos} setPhotos={setPhotos} isLoading={isLoading} />} />
+          <Route path=":roverId" element={<Rover manifests={manifests} handleDateChange={handleDateChange} date={date} setDate={setDate} isValidDate={isValidDate} setIsValidDate={setIsValidDate} dateData={dateData} handleRadioChange={handleRadioChange} cameraSelected={cameraSelected} photos={photos} setPhotos={setPhotos} isLoading={isLoading} log={log} setLog={setLog} />} />
         </Route>
+        <Route path="/logger" element={<Logger log={log} setLog={setLog} />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </>

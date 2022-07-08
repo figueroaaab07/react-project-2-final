@@ -4,7 +4,7 @@ import Camera from "./Camera";
 import Photos from "./Photos";
 import { v4 as uuid } from "uuid";
 
-function Rover({ manifests, handleDateChange, date, setDate, isValidDate, setIsValidDate, dateData, handleRadioChange, cameraSelected, photos, setPhotos, isLoading }) {
+function Rover({ manifests, handleDateChange, date, setDate, isValidDate, setIsValidDate, dateData, handleRadioChange, cameraSelected, photos, setPhotos, isLoading, log, setLog }) {
   let params = useParams();
   const location = useLocation();
   const roverManifest = manifests.filter(rover => rover.name.toLowerCase() === params.roverId);
@@ -35,7 +35,7 @@ function Rover({ manifests, handleDateChange, date, setDate, isValidDate, setIsV
         </>)}
       {isValidDate && (cameras.map(camera => <Camera key={uuid()} camera={camera} handleRadioChange={handleRadioChange} cameraSelected={cameraSelected} />))}<br></br>
 
-      {isValidDate && (cameras.length) && !(isLoading) && <Photos photos={photos} />}
+      {isValidDate && (cameras.length) && !(isLoading) && <Photos photos={photos} log={log} setLog={setLog} />}
       <Outlet />
     </>
   );

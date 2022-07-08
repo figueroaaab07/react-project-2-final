@@ -32,6 +32,12 @@ function NavBar() {
       >
         Rovers
       </NavLink>
+      <NavLink
+        style={style}
+        to="/logger"
+      >
+        Logger
+      </NavLink>
     </nav>
   );
 }

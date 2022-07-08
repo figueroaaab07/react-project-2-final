@@ -18,8 +18,8 @@ function Rovers({ manifests }) {
         {manifests.map((rover) => (
           <NavLink style={style} key={rover.name} to={rover.name.toLowerCase()}>{rover.name}</NavLink>
         ))}
+        <Outlet />
       </nav>
-      <Outlet />
     </>
   );
 }
