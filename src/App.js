@@ -97,6 +97,18 @@ function App() {
     getSpiritData();
   }, []);
 
+  async function getLogs() {
+    let response = await fetch(
+      "https://backend-project-2-final.herokuapp.com/log"
+    );
+    const json = await response.json();
+    setLog(json);
+  }
+
+  useEffect(() => {
+    getLogs();
+  }, [isValidDate]);
+
 
   function handleDateChange(event) {
     const dateInput = event.target.value;
