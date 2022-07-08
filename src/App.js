@@ -49,7 +49,7 @@ function App() {
 
   async function getManifests() {
     let response = await fetch(
-      `${process.env.REACT_APP_API_URL}/manifests`
+      "https://backend-project-2-final.herokuapp.com/manifests"
     );
     const json = await response.json();
     setManifests(json);
@@ -62,7 +62,7 @@ function App() {
 
   async function getCuriosityData() {
     let response = await fetch(
-      `${process.env.REACT_APP_API_URL}/curiosity`
+      "https://backend-project-2-final.herokuapp.com/curiosity"
     );
     const json = await response.json();
     setCuriosityData(json);
@@ -75,7 +75,7 @@ function App() {
 
   async function getOpportunityData() {
     let response = await fetch(
-      `${process.env.REACT_APP_API_URL}/opportunity`
+      "https://backend-project-2-final.herokuapp.com/opportunity"
     );
     const json = await response.json();
     setOpportunityData(json);
@@ -87,7 +87,7 @@ function App() {
 
   async function getSpiritData() {
     let response = await fetch(
-      `${process.env.REACT_APP_API_URL}/spirit`
+      "https://backend-project-2-final.herokuapp.com/spirit"
     );
     const json = await response.json();
     setSpiritData(json);

@@ -8,7 +8,7 @@ function Photo({ id, src, log, setLog }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newLog)
     };
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/log`, requestOptions);
+    const response = await fetch("https://backend-project-2-final.herokuapp.com/log", requestOptions);
     const json = await response.json();
     setLog([...log, json]);
   }
