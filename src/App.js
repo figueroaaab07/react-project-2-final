@@ -42,7 +42,7 @@ function App() {
 
   async function getManifests() {
     let response = await fetch(
-      "http://localhost:6001/manifests"
+      "https://backend-project-2-final.herokuapp.com/manifests"
     );
     const json = await response.json();
     setManifests(json);
@@ -55,7 +55,7 @@ function App() {
 
   async function getCuriosityData() {
     let response = await fetch(
-      "http://localhost:6001/curiosity"
+      "https://backend-project-2-final.herokuapp.com/curiosity"
     );
     const json = await response.json();
     setCuriosityData(json);
@@ -68,7 +68,7 @@ function App() {
 
   async function getOpportunityData() {
     let response = await fetch(
-      "http://localhost:6001/opportunity"
+      "https://backend-project-2-final.herokuapp.com/opportunity"
     );
     const json = await response.json();
     setOpportunityData(json);
@@ -80,7 +80,7 @@ function App() {
 
   async function getSpiritData() {
     let response = await fetch(
-      "http://localhost:6001/spirit"
+      "https://backend-project-2-final.herokuapp.com/spirit"
     );
     const json = await response.json();
     setSpiritData(json);
