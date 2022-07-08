@@ -16,7 +16,7 @@ function Photo({ id, src, log, setLog }) {
   useEffect(() => {
     logData({id, src})
   // eslint-disable-next-line
-  }, []);
+  }, [id]);
 
   return (
     <div className="column">
